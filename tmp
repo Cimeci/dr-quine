@@ -1,0 +1,1 @@
+// outside%2$c#include <stdio.h>%2$cconst char  *get_code()%2$c{%2$c%1$creturn %3$c%4$s%3$c%2$c}%2$cint%1$cmain(void)%2$c{%2$c%1$cconst char *s = get_code();%2$c%1$cprintf(s, 9, 10, 34, s);%2$c}
