@@ -1,17 +1,1 @@
-;outside
-extern printf
-global main
-colleen:
-mov rdi,code
-mov rsi,10
-mov rdx,34
-mov rcx,code
-call printf
-ret
-main:
-;inside
-call colleen
-xor rax,rax
-ret
-section .data
-code:db";outside%1$cextern printf%1$cglobal main%1$ccolleen:%1$cmov rdi,code%1$cmov rsi,10%1$cmov rdx,34%1$cmov rcx,code%1$ccall printf%1$cret%1$cmain:%1$c;inside%1$ccall colleen%1$cxor rax,rax%1$cret%1$csection .data%1$ccode:db%2$c%3$s%2$c"
+section .data%2$sfilename db %1$cGrace_kid.s%1$c, 0%2$smode db %1$cw%1$c, 0%2$scode db %1$c%3$s%1$c, 0%2$ssection .bss%2$sfile_ptr resq 1%2$ssection .text%2$sglobal main%2$sextern fopen, fprintf, fclose%2$s%macro Mopen 2%2$smov rdi, %1%2$smov rsi, %2%2$scall fopen%2$stest rax, rax%2$sjz error%2$smov [file_ptr], rax%2$s%endmacro%2$s%macro Mprint 4%2$smov rdi, [file_ptr]%2$smov rsi, %1%2$smov rdx, %2%2$smov rcx, %3%2$smov r8, %4%2$scall fprintf%2$s%endmacro%2$s%macro Mclose 0%2$smov rdi, [file_ptr]%2$scall fclose%2$s%endmacro%2$smain:%2$sMopen filename, mode%2$sMprint code, 34, 10, code%2$sMclose%2$smov rax, 60%2$sxor rdi, rdi%2$ssyscall%2$serror:%2$smov rax, 60%2$smov rdi, 1%2$ssyscall
