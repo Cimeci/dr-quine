@@ -1,31 +1,28 @@
-NAME = Grace
-SRC = Grace.s
-OBJ = Grace.o
-OUT = Grace_kid.s
+NAME	= Grace
 
-NASM = nasm
-NASMFLAGS = -f elf64
+SRC		= Grace.s
 
-CC = gcc
-CFLAGS = -no-pie -nostartfiles -lc
+NASM	= nasm
+
+NASM_FLAGS = -f elf64 -g
+
+OBJ		=  $(SRC:.s=.o)
+
+LINK	= gcc -m64 -o
+
+NASM	+= $(NASM_FLAGS)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(LINK) $(NAME) $^ -lc -no-pie
 
-$(OBJ): $(SRC)
-	$(NASM) $(NASMFLAGS) $(SRC) -o $(OBJ)
-
-run: $(NAME)
-	./$(NAME)
-	cat $(OUT)
+%.o: %.s
+	@$(NASM) $< -o $@
 
 clean:
-	rm -f $(OBJ) $(OUT)
-
+	@rm -rf $(OBJ)
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf Grace_kid.s
-
+	@rm -rf $(NAME)
+	@rm -rf Grace_kid.s
 re: fclean all
