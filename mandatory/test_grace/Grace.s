@@ -20,6 +20,7 @@ mov rdi, [file_ptr]
 mov rsi, %1
 mov rdx, 34
 mov rcx, 10
+mov r8, %1
 call fprintf
 %endmacro
 %macro Mclose 0
